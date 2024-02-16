@@ -27,6 +27,7 @@ class imageSubscriber : public rclcpp::Node{
 private:
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr  clickPointSubscriber;
     void callback(sensor_msgs::msg::Image msg);
+    void image_deal();
 public:
     imageSubscriber():Node("Subscriber"){
         clickPointSubscriber = this->create_subscription<sensor_msgs::msg::Image>(
