@@ -25,14 +25,23 @@ using std::placeholders::_1;
 
 class imageSubscriber : public rclcpp::Node{
 private:
-    rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr  clickPointSubscriber;
-    void callback(sensor_msgs::msg::Image msg);
-    void image_deal();
+    rclcpp::Publisher<geometry_msgs::msg::Point32>::SharedPtr clickPoint;
+    rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr  imageSubscription;
+    std::queue<geometry_msgs::msg::Point32>msg;
+    void image_callback(sensor_msgs::msg::Image msg);
+    void click_callback();
+    void image_deal(cv::Mat image);
 public:
     imageSubscriber():Node("Subscriber"){
-        clickPointSubscriber = this->create_subscription<sensor_msgs::msg::Image>(
-                "/raw_image",10,std::bind(&imageSubscriber::callback,this,_1));
-    }
+        imageSubscription = this->create_subscription<sensor_msgs::msg::Image>(
+                "/raw_image",10,std::bind(&imageSubscriber::image_callback,this,_1));
 
+        clickPoint=this->create_publisher<geometry_msgs::msg::Point32>(
+                "/click_position",10);
+        rclcpp::TimerBase::SharedPtr timer_;
+        timer_ = this->create_wall_timer(
+                500ms, std::bind(&imageSubscriber::click_callback, this));
+
+    }
 };
 #endif //HOMEWORK_IMAGESUBSCRIPER_H
