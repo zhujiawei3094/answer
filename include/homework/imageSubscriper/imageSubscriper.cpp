@@ -2,10 +2,10 @@
 // Created by zhu on 24-2-15.
 //
 #include"imageSubscriper.h"
-void imageSubscriber::image_callback(sensor_msgs::msg::Image msg){
+void imageSubscriber::image_callback(sensor_msgs::msg::Image::SharedPtr msg){
 
     cv_bridge::CvImagePtr cvImage;
-    cvImage = cv_bridge::toCvCopy(msg,msg.encoding);
+    cvImage = cv_bridge::toCvCopy(msg,msg->encoding);
     cv::Mat image = cvImage->image;
     //std::string outputFilename = "output.png";
    // cv::imwrite(outputFilename, image);

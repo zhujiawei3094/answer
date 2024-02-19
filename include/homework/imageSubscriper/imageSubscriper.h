@@ -4,9 +4,6 @@
 
 #ifndef HOMEWORK_IMAGESUBSCRIPER_H
 #define HOMEWORK_IMAGESUBSCRIPER_H
-#include "websocketpp/config/asio_no_tls.hpp"
-
-#include "websocketpp/server.hpp"
 
 #include <iostream>
 #include <thread>
@@ -18,8 +15,6 @@
 
 #include <cv_bridge/cv_bridge.h>
 
-using Server = websocketpp::server<websocketpp::config::asio>;
-using message_ptr = Server::message_ptr;
 using namespace std::chrono_literals;
 using std::placeholders::_1;
 
@@ -28,7 +23,7 @@ private:
     rclcpp::Publisher<geometry_msgs::msg::Point32>::SharedPtr clickPoint;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr  imageSubscription;
     std::queue<geometry_msgs::msg::Point32>msg;
-    void image_callback(sensor_msgs::msg::Image msg);
+    void image_callback(sensor_msgs::msg::Image::SharedPtr msg);
     void click_callback();
     void image_deal(cv::Mat image);
     rclcpp::TimerBase::SharedPtr timer_;

@@ -39,8 +39,6 @@ add_executable(${PROJECT_NAME}_node
         src/answer_node.cpp
         include/homework/imageSubscriper/imageSubscriper.h
         include/homework/imageSubscriper/imageSubscriper.cpp
-        include/homework/imageDeal/imageDeal.cpp
-        include/homework/imageDeal/imageDeal.h
 )
 target_link_libraries(${PROJECT_NAME}_node ${OpenCV_LIBRARIES})
 ament_target_dependencies(${PROJECT_NAME}_node ${AMENT_DEPENDENCIES})

@@ -1,7 +1,7 @@
 #include "homework/imageSubscriper/imageSubscriper.h"
 int main(int argc, char **argv) {
     rclcpp::init(argc,argv);
-    std::thread SubscriberThread([=](){
+    /*std::thread SubscriberThread([=](){
         rclcpp::spin(std::make_shared<imageSubscriber>());
         rclcpp::shutdown();
     });
@@ -10,8 +10,11 @@ int main(int argc, char **argv) {
         rclcpp::spin(std::make_shared<imageSubscriber>());
         rclcpp::shutdown();
     });
-    PublisherThread.detach();
+    PublisherThread.detach();*/
 
-    rclcpp::spin(std::make_shared<imageSubscriber>());
-    rclcpp::shutdown();
+
+
+        rclcpp::spin(std::make_shared<imageSubscriber>());
+        rclcpp::shutdown();
+
 }
