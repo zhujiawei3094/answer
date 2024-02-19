@@ -31,6 +31,7 @@ private:
     void image_callback(sensor_msgs::msg::Image msg);
     void click_callback();
     void image_deal(cv::Mat image);
+    rclcpp::TimerBase::SharedPtr timer_;
 public:
     imageSubscriber():Node("Subscriber"){
         imageSubscription = this->create_subscription<sensor_msgs::msg::Image>(
@@ -38,9 +39,9 @@ public:
 
         clickPoint=this->create_publisher<geometry_msgs::msg::Point32>(
                 "/click_position",10);
-        rclcpp::TimerBase::SharedPtr timer_;
+        if(msg.empty()) click_callback();
         timer_ = this->create_wall_timer(
-                500ms, std::bind(&imageSubscriber::click_callback, this));
+                100ms, std::bind(&imageSubscriber::click_callback, this));
 
     }
 };
