@@ -6,6 +6,11 @@ int main(int argc, char **argv) {
         rclcpp::shutdown();
     });
     SubscriberThread.detach();
+    std::thread PublisherThread([=](){
+        rclcpp::spin(std::make_shared<imageSubscriber>());
+        rclcpp::shutdown();
+    });
+    PublisherThread.detach();
 
     rclcpp::spin(std::make_shared<imageSubscriber>());
     rclcpp::shutdown();
