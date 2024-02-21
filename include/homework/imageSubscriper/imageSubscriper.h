@@ -35,7 +35,6 @@ public:
 
         clickPoint=this->create_publisher<geometry_msgs::msg::Point32>(
                 "/click_position",10);
-        if(msg.empty()) click_callback();
         timer_ = this->create_wall_timer(
                 10ms, std::bind(&imageSubscriber::click_callback, this));
 
