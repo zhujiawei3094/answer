@@ -20,6 +20,7 @@ using std::placeholders::_1;
 
 class imageSubscriber : public rclcpp::Node{
 private:
+    int count;
     rclcpp::Publisher<geometry_msgs::msg::Point32>::SharedPtr clickPoint;
     rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr  imageSubscription;
     std::queue<geometry_msgs::msg::Point32>msg;
@@ -36,7 +37,7 @@ public:
                 "/click_position",10);
         if(msg.empty()) click_callback();
         timer_ = this->create_wall_timer(
-                100ms, std::bind(&imageSubscriber::click_callback, this));
+                10ms, std::bind(&imageSubscriber::click_callback, this));
 
     }
 };
