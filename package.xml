@@ -7,6 +7,7 @@
   <maintainer email="1012866210@qq.com">mijiao</maintainer>
   <license>Apache-2.0</license>
 
+  <depend>ros2launch</depend>
   <buildtool_depend>ament_cmake</buildtool_depend>
 
   <test_depend>ament_lint_auto</test_depend>
